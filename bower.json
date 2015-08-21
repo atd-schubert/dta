@@ -1,0 +1,27 @@
+{
+  "name": "dta",
+  "main": "dta.js",
+  "version": "0.0.1",
+  "homepage": "https://github.com/atd-schubert/dta",
+  "authors": [
+    "Arne Schubert <atd.schubert@gmail.com>"
+  ],
+  "description": "Dynamically typed arguments for javascript",
+  "moduleType": [
+    "amd",
+    "node"
+  ],
+  "keywords": [
+    "dynamic-typed",
+    "arguments",
+    "function-calls"
+  ],
+  "license": "ISC",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
