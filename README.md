@@ -64,7 +64,7 @@ call, or with a function called `request` in node, you can do this the following
 // you have already loaded DTA with one of the above described methods.
 var getContent;
 
-getContent = function getContent () {
+getContent = function getContent() {
     var params, opts;
 
     opts = {};
@@ -99,7 +99,7 @@ But DTA is also able to get mandatory parameters:
 // you have already loaded DTA with one of the above described methods.
 var getContent;
 
-getContent = function getContent () {
+getContent = function getContent() {
     var params, opts;
 
     opts = {};
@@ -126,7 +126,7 @@ DTA can handle multiple arguments of the same type:
 // you have already loaded DTA with one of the above described methods.
 var sayHello;
 
-sayHello = function sayHello () {
+sayHello = function sayHello() {
     var params;
 
     params = dta({
@@ -148,7 +148,7 @@ If you have unspecific number of parameters of a type you are able to handle it 
 // you have already loaded DTA with one of the above described methods.
 var factorize;
 
-factorize = function factorize () {
+factorize = function factorize() {
     var params, i, result;
 
     params = dta({
@@ -159,7 +159,7 @@ factorize = function factorize () {
     result = params.factor[0];
 
     for (i = 1; i < params.factor.length; i += 1) {
-        result *= params.factor[i]
+        result *= params.factor[i];
     }
 
     return result;
@@ -188,7 +188,7 @@ myOwnClass = function () {
     // Your class logic
 }
 
-anyFunction = function anyFunction () {
+anyFunction = function anyFunction() {
     var params;
 
     params = dta({
