@@ -1,5 +1,5 @@
 # Dynamically typed arguments
-Or in short "dta". Is a library to map arguments by type or prototype.
+Or in short "DTA". Is a library to map arguments by type or prototype.
 
 ## How to install
 
@@ -61,7 +61,7 @@ Adopted you have a function where you want to request an url, it is not necessar
 call, or with a function called `request` in node, you can do this the following way:
 
 ```js
-// you have already loaded dta with one of the above described methods.
+// you have already loaded DTA with one of the above described methods.
 var getContent;
 
 getContent = function getContent () {
@@ -96,7 +96,7 @@ Now the order of your parameters in `getContent` is not necessary any more.
 But DTA is also able to get mandatory parameters:
 
 ```js
-// you have already loaded dta with one of the above described methods.
+// you have already loaded DTA with one of the above described methods.
 var getContent;
 
 getContent = function getContent () {
@@ -123,7 +123,7 @@ getContent = function getContent () {
 
 DTA can handle multiple arguments of the same type:
 ```js
-// you have already loaded dta with one of the above described methods.
+// you have already loaded DTA with one of the above described methods.
 var sayHello;
 
 sayHello = function sayHello () {
@@ -145,7 +145,7 @@ sayHello = function sayHello () {
 If you have unspecific number of parameters of a type you are able to handle it this way:
 
 ```js
-// you have already loaded dta with one of the above described methods.
+// you have already loaded DTA with one of the above described methods.
 var factorize;
 
 factorize = function factorize () {
@@ -181,7 +181,7 @@ DTA is also able to handle your own types. You have to define your prototypes in
 map them the default way:
 
 ```js
-// you have already loaded dta with one of the above described methods.
+// you have already loaded DTA with one of the above described methods.
 var anyFunction, myOwnClass;
 
 myOwnClass = function () {
