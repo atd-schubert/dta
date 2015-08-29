@@ -39,6 +39,7 @@
 
         translator.prototypes = translator.prototypes || {};
         translator.prototypes.array = translator.prototypes.array || Array;
+        translator.prototypes.error = translator.prototypes.error || Error;
         result = {};
 
         for (hash in translator) {

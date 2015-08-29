@@ -229,6 +229,47 @@ describe('Working with arrays', function () {
     });
 });
 
+describe('Working with errors', function () {
+    var errA, errB, errC, errD;
+
+    errA = new Error('a');
+    errB = new Error('b');
+    errC = new Error('c');
+    errD = new Error('d');
+
+    it('should work with a single error', function () {
+        var result;
+        result = dta({error: 'test'}, [errA]);
+        if (result.test !== errA) {
+            throw new Error('This is not the expected error');
+        }
+    });
+    it('should work with multiple errors', function () {
+        var result;
+        result = dta({error: ['first', 'second', 'third']}, [errA, errB, errC]);
+        if (result.first !== errA || result.second !== errB || result.third !== errC) {
+            throw new Error('This is not the expected error');
+        }
+    });
+    it('should work with multiple errors optional', function () {
+        var result;
+        result = dta({error: ['first', 'second', 'third']}, [errA, errB]);
+        if (result.first !== errA || result.second !== errB || result.third !== undefined) {
+            throw new Error('This is not the expected error');
+        }
+    });
+    it('should not work with multiple errors but more arguments', function () {
+        try {
+            dta({error: ['first', 'second', 'third']}, [errA, errB, errC, errD]);
+            throw new Error('This has not thrown an error');
+        } catch (err) {
+            if (err.message !== 'Can not handle argument') {
+                throw new Error('This is not the expected error');
+            }
+        }
+    });
+});
+
 describe('Working with self-defined classes', function () {
     var ExampleClass, instanceA, instanceB, instanceC, instanceD;
 
@@ -273,7 +314,7 @@ describe('Working with self-defined classes', function () {
 });
 
 describe('Working with multiple types', function () {
-    var ExampleClass, bool, num, str, instance, fn, obj, arr;
+    var ExampleClass, bool, num, str, instance, fn, obj, arr, err;
 
     ExampleClass = function () {};
 
@@ -284,6 +325,7 @@ describe('Working with multiple types', function () {
     fn = function () {};
     obj = {};
     arr = [];
+    err = new Error();
 
     it('should work with all types together', function () {
         var result;
@@ -294,9 +336,10 @@ describe('Working with multiple types', function () {
             instance: 'instance',
             function: 'fn',
             object: 'obj',
-            array: 'arr'
-        }, [bool, num, str, instance, fn, obj, arr]);
-        if (result.bool !== bool || result.num !== num || result.str !== str || result.instance !== instance || result.fn !== fn || result.obj !== obj || result.arr !== arr) {
+            array: 'arr',
+            error: 'err'
+        }, [bool, num, str, instance, fn, obj, arr, err]);
+        if (result.bool !== bool || result.num !== num || result.str !== str || result.instance !== instance || result.fn !== fn || result.obj !== obj || result.arr !== arr || result.err !== err) {
             throw new Error('This is not the expected arguments');
         }
     });

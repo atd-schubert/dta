@@ -174,6 +174,7 @@ factorize = function factorize() {
 - `function`
 - `object`
 - `array`
+- `error`
 
 ### Make your own types
 
