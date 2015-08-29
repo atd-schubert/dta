@@ -374,3 +374,20 @@ describe('Working with lists', function () {
         }
     });
 });
+
+
+describe('Working with a function instead of arguments', function () {
+    it('should work with something like a callback function', function () {
+        var fn;
+
+        fn = dta({
+            boolean: 'isWorking',
+            string: 'text'
+        }, function workingWithFn (params) {
+            if (!params.isWorking || params.text !== 'ok') {
+                throw new Error('It does not give the right results!');
+            }
+        });
+        fn('ok', true);
+    });
+});

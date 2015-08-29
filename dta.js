@@ -55,7 +55,7 @@
             return function () {
                 return arrOrFn(dta(translator, arguments));
             };
-        } else if (Array.prototype.isPrototypeOf(arrOrFn)) {
+        } else if (arrOrFn.toString() === '[object Arguments]' || Array.prototype.isPrototypeOf(arrOrFn)) {
             for (i = 0; i < arrOrFn.length; i += 1) {
                 tmpType = typeof arrOrFn[i];
 
