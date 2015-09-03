@@ -1,12 +1,22 @@
 /*jslint node:true, browser:true*/
-/*globals define*/
+/*globals define, toString*/
 // Wrapper for supporting Node, Browsers and AMD
 (function (define) {
     'use strict';
 
-    var findPrototype, dta;
+    var findPrototype, isArguments, dta;
 
-    findPrototype = function (translator, result, elem) {
+    // code from underscore: https://github.com/jashkenas/underscore/blob/master/underscore.js
+    isArguments = function isArguments(obj) {
+        return toString.call(obj) === '[object Arguments]';
+    };
+    if (!isArguments(arguments)) {
+        isArguments = function (obj) {
+            return obj && obj.hasOwnProperty('callee');
+        };
+    }
+
+    findPrototype = function findPrototype(translator, result, elem) {
         var hash, tmpName;
 
         for (hash in translator.prototypes) {
@@ -58,13 +68,16 @@
                 return arrOrFn(dta(translator, arguments));
             };
         }
-        if (arrOrFn.toString() === '[object Arguments]' || Array.prototype.isPrototypeOf(arrOrFn)) {
+        if (isArguments(arrOrFn) || Array.prototype.isPrototypeOf(arrOrFn)) {
             for (i = 0; i < arrOrFn.length; i += 1) {
                 tmpType = typeof arrOrFn[i];
 
                 if (tmpType === 'object') {
                     // This could be a lot of prototypes or just an object
                     if (!findPrototype(translator, result, arrOrFn[i])) {
+                        if (isArguments(arrOrFn[i])) {
+                            tmpType = 'argument';
+                        }
                         if (!translator[tmpType] || translator[tmpType].length === 0) {
                             throw new Error('Can not handle argument number ' + i);
                         }

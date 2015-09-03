@@ -311,6 +311,55 @@ describe('Working with regular expressions', function () {
     });
 });
 
+describe('Working with arguments', function () {
+    var argumentA, argumentB, argumentC, argumentD;
+
+    (function () {
+        argumentA = arguments;
+    })();
+    (function () {
+        argumentB = arguments;
+    })();
+    (function () {
+        argumentC = arguments;
+    })();
+    (function () {
+        argumentD = arguments;
+    })();
+
+    it('should work with a single argument', function () {
+        var result;
+        result = dta({argument: 'test'}, [argumentA]);
+        if (result.test !== argumentA) {
+            throw new Error('This is not the expected argument');
+        }
+    });
+    it('should work with multiple arguments', function () {
+        var result;
+        result = dta({argument: ['first', 'second', 'third']}, [argumentA, argumentB, argumentC]);
+        if (result.first !== argumentA || result.second !== argumentB || result.third !== argumentC) {
+            throw new Error('This is not the expected argument');
+        }
+    });
+    it('should work with multiple arguments optional', function () {
+        var result;
+        result = dta({argument: ['first', 'second', 'third']}, [argumentA, argumentB]);
+        if (result.first !== argumentA || result.second !== argumentB || result.third !== undefined) {
+            throw new Error('This is not the expected argument');
+        }
+    });
+    it('should not work with multiple arguments but more arguments', function () {
+        try {
+            dta({argument: ['first', 'second', 'third']}, [argumentA, argumentB, argumentC, argumentD]);
+            throw new Error('This has not thrown an error');
+        } catch (err) {
+            if (err.message !== 'Can not handle argument number 3') {
+                throw new Error('This is not the expected error');
+            }
+        }
+    });
+});
+
 describe('Working with self-defined classes', function () {
     var ExampleClass, instanceA, instanceB, instanceC, instanceD;
 
@@ -380,9 +429,10 @@ describe('Working with multiple types', function () {
             object: 'obj',
             array: 'arr',
             error: 'err',
-            regExp: 'regExp'
-        }, [bool, num, str, instance, fn, obj, arr, err, regExp]);
-        if (result.bool !== bool || result.num !== num || result.str !== str || result.instance !== instance || result.fn !== fn || result.obj !== obj || result.arr !== arr || result.err !== err || result.regExp !== regExp) {
+            regExp: 'regExp',
+            argument: 'argument'
+        }, [bool, num, str, instance, fn, obj, arr, err, regExp, arguments]);
+        if (result.bool !== bool || result.num !== num || result.str !== str || result.instance !== instance || result.fn !== fn || result.obj !== obj || result.arr !== arr || result.err !== err || result.regExp !== regExp || result.argument !== arguments) {
             throw new Error('This is not the expected arguments');
         }
     });
