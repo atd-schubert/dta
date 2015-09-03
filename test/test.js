@@ -355,7 +355,7 @@ describe('Working with self-defined classes', function () {
 });
 
 describe('Working with multiple types', function () {
-    var ExampleClass, bool, num, str, instance, fn, obj, arr, err;
+    var ExampleClass, bool, num, str, instance, fn, obj, arr, err, regExp;
 
     ExampleClass = function () {};
 
@@ -367,6 +367,7 @@ describe('Working with multiple types', function () {
     obj = {};
     arr = [];
     err = new Error();
+    regExp = /abc/;
 
     it('should work with all types together', function () {
         var result;
@@ -378,9 +379,10 @@ describe('Working with multiple types', function () {
             function: 'fn',
             object: 'obj',
             array: 'arr',
-            error: 'err'
-        }, [bool, num, str, instance, fn, obj, arr, err]);
-        if (result.bool !== bool || result.num !== num || result.str !== str || result.instance !== instance || result.fn !== fn || result.obj !== obj || result.arr !== arr || result.err !== err) {
+            error: 'err',
+            regExp: 'regExp'
+        }, [bool, num, str, instance, fn, obj, arr, err, regExp]);
+        if (result.bool !== bool || result.num !== num || result.str !== str || result.instance !== instance || result.fn !== fn || result.obj !== obj || result.arr !== arr || result.err !== err || result.regExp !== regExp) {
             throw new Error('This is not the expected arguments');
         }
     });
