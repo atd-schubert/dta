@@ -214,6 +214,7 @@ anyFunction(new myOwnClass());
 No, you are also able to use DTA with normal arrays!
 
 ## Pass a function instead of arrays or arguments
+
 You can also use dta to create a function (with thanks to Andreas for this idea!)
 
 ```js
@@ -234,4 +235,30 @@ factorize = dta({
 
     return result;
 });
+```
+
+## Use your preferred order of arguments in DTA
+
+The order of the two arguments in DTA is not compulsory. If you want you can pass arguments first.
+
+```js
+// you have already loaded DTA with one of the above described methods.
+var factorize;
+
+factorize = function factorize() {
+    var params, i, result;
+
+    params = dta(arguments, {
+        mandatory: 'factor',
+        number: '[factor]'
+    });
+
+    result = params.factor[0];
+
+    for (i = 1; i < params.factor.length; i += 1) {
+        result *= params.factor[i];
+    }
+
+    return result;
+};
 ```

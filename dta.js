@@ -43,6 +43,11 @@
     dta = function dta(translator, arrOrFn) {
         var i, hash, result, tmpName, tmpType;
 
+        if ((isArguments(translator) || Array.prototype.isPrototypeOf(translator)) && (!isArguments(arrOrFn) || !Array.prototype.isPrototypeOf(arrOrFn))) { // Change order if valid
+            tmpType = translator;
+            translator = arrOrFn;
+            arrOrFn = tmpType;
+        }
         if (typeof translator !== 'object') {
             throw new Error('Can not handle translator object');
         }

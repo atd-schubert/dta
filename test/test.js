@@ -436,6 +436,25 @@ describe('Working with multiple types', function () {
             throw new Error('This is not the expected arguments');
         }
     });
+
+    it('should work with arguments first', function () {
+        var result;
+        result = dta([bool, num, str, instance, fn, obj, arr, err, regExp, arguments], {prototypes: {instance: ExampleClass},
+            boolean: 'bool',
+            number: 'num',
+            string: 'str',
+            instance: 'instance',
+            function: 'fn',
+            object: 'obj',
+            array: 'arr',
+            error: 'err',
+            regExp: 'regExp',
+            argument: 'argument'
+        });
+        if (result.bool !== bool || result.num !== num || result.str !== str || result.instance !== instance || result.fn !== fn || result.obj !== obj || result.arr !== arr || result.err !== err || result.regExp !== regExp || result.argument !== arguments) {
+            throw new Error('This is not the expected arguments');
+        }
+    });
 });
 
 describe('Working with mandatory types', function () {
