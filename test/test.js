@@ -270,6 +270,47 @@ describe('Working with errors', function () {
     });
 });
 
+describe('Working with regular expressions', function () {
+    var regExpA, regExpB, regExpC, regExpD;
+
+    regExpA = /abc/;
+    regExpB = /abc/;
+    regExpC = /abc/;
+    regExpD = /abc/;
+
+    it('should work with a single regular expression', function () {
+        var result;
+        result = dta({regExp: 'test'}, [regExpA]);
+        if (result.test !== regExpA) {
+            throw new Error('This is not the expected regExp');
+        }
+    });
+    it('should work with multiple regular expressions', function () {
+        var result;
+        result = dta({regExp: ['first', 'second', 'third']}, [regExpA, regExpB, regExpC]);
+        if (result.first !== regExpA || result.second !== regExpB || result.third !== regExpC) {
+            throw new Error('This is not the expected regExp');
+        }
+    });
+    it('should work with multiple regular expressions optional', function () {
+        var result;
+        result = dta({regExp: ['first', 'second', 'third']}, [regExpA, regExpB]);
+        if (result.first !== regExpA || result.second !== regExpB || result.third !== undefined) {
+            throw new Error('This is not the expected regExp');
+        }
+    });
+    it('should not work with multiple regular expressions but more arguments', function () {
+        try {
+            dta({regExp: ['first', 'second', 'third']}, [regExpA, regExpB, regExpC, regExpD]);
+            throw new Error('This has not thrown an error');
+        } catch (err) {
+            if (err.message !== 'Can not handle argument') {
+                throw new Error('This is not the expected error');
+            }
+        }
+    });
+});
+
 describe('Working with self-defined classes', function () {
     var ExampleClass, instanceA, instanceB, instanceC, instanceD;
 

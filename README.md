@@ -175,6 +175,7 @@ factorize = function factorize() {
 - `object`
 - `array`
 - `error`
+- `regExp`
 
 ### Make your own types
 
