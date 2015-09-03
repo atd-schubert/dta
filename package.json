@@ -1,6 +1,6 @@
 {
   "name": "dta",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Dynamically typed arguments for javascript",
   "main": "dta.js",
   "scripts": {
